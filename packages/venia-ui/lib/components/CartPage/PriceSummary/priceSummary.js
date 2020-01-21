@@ -5,6 +5,7 @@ import { usePriceSummary } from '@magento/peregrine/lib/talons/CartPage/PriceSum
 import Button from '../../Button';
 import { mergeClasses } from '../../../classify';
 import defaultClasses from './priceSummary.css';
+import { GetPriceSummary } from './priceSummary.graphql';
 
 import DiscountSummary, { DiscountSummaryFragment } from './discountSummary';
 import GiftCardSummary, { GiftCardSummaryFragment } from './giftCardSummary';
@@ -23,7 +24,7 @@ import TaxSummary, { TaxSummaryFragment } from './taxSummary';
 const PriceSummary = props => {
     const classes = mergeClasses(defaultClasses, props.classes);
     const talonProps = usePriceSummary({
-        query: PriceSummaryQuery
+        query: GetPriceSummary
     });
 
     const {

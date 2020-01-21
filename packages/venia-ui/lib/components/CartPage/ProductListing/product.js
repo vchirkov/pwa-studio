@@ -1,5 +1,4 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { useProduct } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProduct';
 import { Price } from '@magento/peregrine';
 
@@ -9,8 +8,8 @@ import ProductOptions from '../../MiniCart/productOptions';
 import Section from '../../MiniCart/section';
 import Image from '../../Image';
 import defaultClasses from './product.css';
-import { GET_PRODUCT_LISTING } from './productListing';
 import { PriceSummaryQuery } from '../PriceSummary/priceSummary';
+import { RemoveItem } from './productListing.graphql';
 
 const IMAGE_SIZE = 100;
 
@@ -19,8 +18,7 @@ const Product = props => {
     const talonProps = useProduct({
         item,
         refetchPriceQuery: PriceSummaryQuery,
-        refetchCartQuery: GET_PRODUCT_LISTING,
-        removeItemMutation: REMOVE_ITEM_MUTATION
+        removeItemMutation: RemoveItem
     });
     const {
         handleEditItem,
@@ -89,13 +87,3 @@ const Product = props => {
 };
 
 export default Product;
-
-export const REMOVE_ITEM_MUTATION = gql`
-    mutation removeItem($cartId: String!, $itemId: Int!) {
-        removeItemFromCart(input: { cart_id: $cartId, cart_item_id: $itemId }) {
-            cart {
-                id
-            }
-        }
-    }
-`;

@@ -1,0 +1,42 @@
+#import "../PriceSummary/priceSummary.graphql"
+
+fragment CartBody on Cart {
+    id
+    items {
+        id
+        product {
+            name
+            small_image {
+                url
+            }
+        }
+        prices {
+            price {
+                currency
+                value
+            }
+        }
+        quantity
+        ... on ConfigurableCartItem {
+            configurable_options {
+                option_label
+                value_label
+            }
+        }
+    }
+}
+
+mutation RemoveItem($cartId: String!, $itemId: Int!) {
+    removeItemFromCart(input: { cart_id: $cartId, cart_item_id: $itemId }) {
+        cart {
+            ...CartBody
+            ...PriceSummaryCartBody
+        }
+    }
+}
+
+query GetProductListing($cartId: String!) {
+    cart(cart_id: $cartId) {
+        ...CartBody
+    }
+}

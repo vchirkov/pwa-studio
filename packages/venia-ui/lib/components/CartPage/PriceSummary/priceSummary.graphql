@@ -1,0 +1,49 @@
+fragment PriceSummaryCartBody on Cart {
+    id
+    items {
+        quantity
+    }
+    prices {
+        grand_total {
+            currency
+            value
+        }
+        subtotal_excluding_tax {
+            currency
+            value
+        }
+        applied_taxes {
+            amount {
+                currency
+                value
+            }
+        }
+        discounts {
+            amount {
+                currency
+                value
+            }
+            label
+        }
+    }
+    shipping_addresses {
+        selected_shipping_method {
+            amount {
+                currency
+                value
+            }
+        }
+    }
+    applied_gift_cards {
+        applied_balance {
+            value
+            currency
+        }
+    }
+}
+
+query GetPriceSummary($cartId: String!) {
+    cart(cart_id: $cartId) {
+        ...PriceSummaryCartBody
+    }
+}
