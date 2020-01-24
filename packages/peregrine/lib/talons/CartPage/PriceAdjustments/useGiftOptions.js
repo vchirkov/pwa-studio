@@ -1,24 +1,9 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import throttle from 'lodash.throttle';
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 
 import { useCartContext } from '@magento/peregrine/lib/context/cart';
-
-/**
- * Local query. GQL support is not available as of today.
- *
- * Once available, we can change the query to match the schema.
- */
-const GET_GIFT_OPTIONS_QUERY = gql`
-    query getGiftOptions {
-        gift_options @client {
-            include_gift_receipt
-            include_printed_card
-            gift_message
-        }
-    }
-`;
 
 /**
  * Local mutation. GQL support is not available as of today.
@@ -41,7 +26,7 @@ const SET_GIFT_OPTIONS_QUERY = gql`
     }
 `;
 
-const useGiftOptions = () => {
+const useGiftOptions = ({ data }) => {
     const [includeGiftReceipt, setIncludeGiftReceipt] = useState(false);
     const [includePrintedCard, setIncludePrintedCard] = useState(false);
     const [giftMessage, setGiftMessage] = useState('');
@@ -116,11 +101,11 @@ const useGiftOptions = () => {
     /**
      * Fetch gift options for a given cart id.
      */
-    const { data } = useQuery(GET_GIFT_OPTIONS_QUERY, {
-        variables: {
-            cart_id: cartId
-        }
-    });
+    // const { data } = useQuery(GET_GIFT_OPTIONS_QUERY, {
+    //     variables: {
+    //         cart_id: cartId
+    //     }
+    // });
 
     /**
      * Once data is available from the query request, update

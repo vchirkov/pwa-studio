@@ -1,1 +1,1 @@
-export { default } from './GiftOptions';
+export { default, GiftOptionsFragment } from './GiftOptions';

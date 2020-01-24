@@ -1,12 +1,27 @@
 import React, { useCallback, useMemo } from 'react';
-
-import useGiftOptions from '@magento/peregrine/lib/talons/CartPage/GiftOptions/useGiftOptions';
+import gql from 'graphql-tag';
+import useGiftOptions from '@magento/peregrine/lib/talons/CartPage/PriceAdjustments/useGiftOptions';
 
 import Checkbox from '../../../Checkbox';
 import TextArea from '../../../TextArea';
 import { mergeClasses } from '../../../../classify';
 
 import defaultClasses from './giftOptions.css';
+
+/**
+ * Local query. GQL support is not available as of today.
+ *
+ * Once available, we can change the query to match the schema.
+ */
+export const GiftOptionsFragment = gql`
+    fragment GiftOptions on Cart {
+        gift_options @client {
+            include_gift_receipt
+            include_printed_card
+            gift_message
+        }
+    }
+`;
 
 const GiftOptions = props => {
     const [
@@ -16,7 +31,7 @@ const GiftOptions = props => {
             toggleIncludePrintedCardFlag,
             updateGiftMessage
         }
-    ] = useGiftOptions();
+    ] = useGiftOptions({ data: props.data });
 
     const setGiftMessage = useCallback(
         e => {

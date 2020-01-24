@@ -42,12 +42,14 @@ persistCache({
 });
 
 const initialData = {
-    __typename: 'CartData',
-    gift_options: {
-        __typename: 'GiftOptions',
-        include_gift_receipt: false,
-        include_printed_card: false,
-        gift_message: ''
+    cart: {
+        __typename: 'Cart',
+        gift_options: {
+            __typename: 'GiftOptions',
+            include_gift_receipt: false,
+            include_printed_card: false,
+            gift_message: ''
+        }
     }
 };
 
@@ -65,6 +67,7 @@ const GET_GIFT_OPTIONS_QUERY = gql`
 const resolvers = {
     Query: {
         gift_options: (_, __, { cache }) => {
+            console.log('Hey here dude...', _);
             const {
                 gift_options: {
                     __typename,

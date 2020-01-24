@@ -1,14 +1,20 @@
 import React from 'react';
+import gql from 'graphql-tag';
+
+import usePriceAdjustments from '@magento/peregrine/lib/talons/CartPage/PriceAdjustments/usePriceAdjustments';
 
 import { Accordion, Section } from '../../Accordion';
 
-import GiftOptions from './GiftOptions';
+import GiftOptions, { GiftOptionsFragment } from './GiftOptions';
 
 import { mergeClasses } from '../../../classify';
 import defaultClasses from './priceAdjustments.css';
 
 const PriceAdjustments = props => {
     const classes = mergeClasses(defaultClasses, props.classes);
+    const { queryData = {} } = usePriceAdjustments({
+        query: PriceAdjustmentsQuery
+    });
 
     return (
         <div className={classes.root}>
@@ -33,11 +39,21 @@ const PriceAdjustments = props => {
                     </a>
                 </Section>
                 <Section id={'gift_options'} title={'See Gift Options'}>
-                    <GiftOptions />
+                    <GiftOptions data={queryData.giftOptions} />
                 </Section>
             </Accordion>
         </div>
     );
 };
+
+const PriceAdjustmentsQuery = gql`
+    query PriceAdjustments($cartId: String!) {
+        cart(cart_id: $cartId) {
+            id
+            ...GiftOptionsFragment
+        }
+    }
+    ${GiftOptionsFragment}
+`;
 
 export default PriceAdjustments;
