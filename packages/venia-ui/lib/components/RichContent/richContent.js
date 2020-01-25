@@ -1,11 +1,9 @@
 import React from 'react';
-import detectPageBuilder from './PageBuilder/detectPageBuilder';
-import PageBuilder from './PageBuilder';
+// import PageBuilder, { detectPageBuilder } from '@magento/pagebuilder';
 import { mergeClasses } from '../../classify';
 import defaultClasses from './richContent.css';
 import { shape, string } from 'prop-types';
-
-const toHTML = str => ({ __html: str });
+import richContentRenderers from './richContentRenderers';
 
 /**
  * RichContent component.
@@ -21,20 +19,28 @@ const toHTML = str => ({ __html: str });
  * @returns {React.Element} A React component that renders Heading with optional styling properties.
  */
 const RichContent = props => {
-    const { html } = props;
     const classes = mergeClasses(defaultClasses, props.classes);
 
-    if (detectPageBuilder(html)) {
-        return (
-            <div className={classes.root}>
-                <PageBuilder masterFormat={html} />
-            </div>
+    // richContentRenderers is a LIFO stack; the most recently pushed renderer
+    // should be tried first, so we need to reverse through the array.
+    // That's hard to do efficiently with for..of, so we'll use a regular
+    // for loop here.
+    for (let i = richContentRenderers.length - 1; i > 0; i--) {
+        const Renderer = richContentRenderers[i];
+        const output = <Renderer {...props} />;
+        if (output !== null) {
+            return <div className={classes.root}>{output}</div>;
+        }
+    }
+    // If no renderer returned a value
+    if (process.env.NODE_ENV === 'development') {
+        console.warn(
+            `None of the following rich content renderers returned anything for the provided HTML.`,
+            richContentRenderers,
+            props.html
         );
     }
-
-    return (
-        <div className={classes.root} dangerouslySetInnerHTML={toHTML(html)} />
-    );
+    return null;
 };
 
 /**
