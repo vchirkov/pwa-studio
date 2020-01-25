@@ -21,12 +21,7 @@ import richContentRenderers from './richContentRenderers';
 const RichContent = props => {
     const classes = mergeClasses(defaultClasses, props.classes);
 
-    // richContentRenderers is a LIFO stack; the most recently pushed renderer
-    // should be tried first, so we need to reverse through the array.
-    // That's hard to do efficiently with for..of, so we'll use a regular
-    // for loop here.
-    for (let i = richContentRenderers.length - 1; i > 0; i--) {
-        const Renderer = richContentRenderers[i];
+    for (const Renderer of richContentRenderers) {
         const output = <Renderer {...props} />;
         if (output !== null) {
             return <div className={classes.root}>{output}</div>;

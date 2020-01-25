@@ -1,4 +1,7 @@
+/* IMPORTS */
 import PlainHtmlRenderer from './plainHtmlRenderer';
 
-module.exports = [PlainHtmlRenderer];
-/* */
+export default [
+/* EXPORTS */
+    PlainHtmlRenderer
+]
