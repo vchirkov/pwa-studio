@@ -31,7 +31,7 @@ const RichContent = props => {
     if (process.env.NODE_ENV === 'development') {
         console.warn(
             `None of the following rich content renderers returned anything for the provided HTML.`,
-            richContentRenderers,
+            richContentRenderers.map(r => `<${r.name}>`),
             props.html
         );
     }
