@@ -1,12 +1,21 @@
+import Button from "../../../../components/Button"
 import ButtonGroup from "../../../../components/ButtonGroup"
 import Box from "../../../../components/Box"
 import Columns from "../../../../components/Columns"
-import TwoColumnGrid from "./TwoColumnGrid"
+import Dimensions from "./Dimensions"
+import GridLayout from "./GridLayout"
 
 <Columns>
-  <TwoColumnGrid />
+  <GridLayout />
   <ButtonGroup>
-  <Box style={{ width: 120 }} />
-  <Box style={{ width: 120 }} />
+    <Box style={{ height: 36, width: 120 }} />
+    <Box style={{ height: 36, width: 120 }} />
+  </ButtonGroup>
+</Columns>
+<Columns>
+  <Dimensions />
+  <ButtonGroup>
+    <Button priority="normal">Back</Button>
+    <Button priority="high">Go</Button>
   </ButtonGroup>
 </Columns>

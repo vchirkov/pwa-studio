@@ -1,3 +1,5 @@
 #### Fixed position
 
-Within a modal, a button group is affixed to the bottom of the modal.
+Typically, a button group appears at the end of a workflow and contains related actions. While a workflow may overflow its container, a button group remains on screen by affixing itself to the viewport.
+
+Within a modal, a button group may affix itself to the modal instead of the viewport, since a modal handles its own overflow.
