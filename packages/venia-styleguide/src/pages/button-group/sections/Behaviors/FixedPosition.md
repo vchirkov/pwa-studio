@@ -2,4 +2,4 @@
 
 Typically, a button group appears at the end of a workflow and contains related actions. While a workflow may overflow its container, a button group remains on screen by affixing itself to the viewport.
 
-Within a modal, a button group may affix itself to the modal instead of the viewport, since a modal handles its own overflow.
+Within a modal, a button group participates in the modal's layout, since a modal handles its own overflow.
