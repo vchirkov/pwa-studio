@@ -9,6 +9,11 @@
   "browser": {
     "@magento/venia-drivers": "@magento/venia-ui/lib/drivers"
   },
+  "pwa-studio": {
+    "targets": {
+      "intercept": "./intercept"
+    }
+  },
   "files": [
     "lib/*",
     "upward.yml",

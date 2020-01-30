@@ -49,6 +49,7 @@
     "@babel/runtime": "~7.4.2",
     "@magento/babel-preset-peregrine": "~1.0.0",
     "@magento/eslint-config": "~1.5.0",
+    "@magento/pagebuilder": "~1.0.0",
     "@magento/peregrine": "~4.0.0",
     "@magento/pwa-buildpack": "~4.0.0",
     "@magento/upward-js": "~3.0.0",

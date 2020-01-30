@@ -5,6 +5,7 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const PWADevServer = require('../WebpackTools/PWADevServer');
+const BuildBusPlugin = require('../WebpackTools/plugins/BuildBusPlugin');
 const RootComponentsPlugin = require('../WebpackTools/plugins/RootComponentsPlugin');
 const UpwardIncludePlugin = require('../WebpackTools/plugins/UpwardIncludePlugin');
 const MagentoResolver = require('../WebpackTools/MagentoResolver');
@@ -119,6 +120,7 @@ module.exports = async function({
             }
         }),
         plugins: [
+            new BuildBusPlugin(),
             new RootComponentsPlugin({
                 rootComponentsDirs: [
                     ...hasFlag('rootComponents'),

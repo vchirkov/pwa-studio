@@ -18,7 +18,7 @@ module.exports = function buildRichContentRendererArray(source) {
     const { renderers } = loaderUtils.getOptions(this);
     let importStatements = '';
     let exportComponents = '';
-    Object.entries(renderers).forEach(([component, filepath]) => {
+    renderers.forEach(([component, filepath]) => {
         importStatements += `import ${component} from '${filepath}';\n`;
         exportComponents += `    ${component},\n`;
     });

@@ -9,6 +9,12 @@
   "browser": {
     "@magento/venia-drivers": "./lib/drivers"
   },
+  "pwa-studio": {
+    "targets": {
+      "declare": "./targets/declare",
+      "intercept": "./targets/intercept"
+    }
+  },
   "files": [
     "{lib,static,templates}/*",
     "{lib,static,templates}/**/*",
@@ -74,7 +80,6 @@
   },
   "peerDependencies": {
     "@magento/babel-preset-peregrine": "~1.0.0",
-    "@magento/pagebuilder": "~4.0.0",
     "@magento/peregrine": "~4.0.0",
     "@magento/pwa-buildpack": "~4.0.0",
     "apollo-cache-inmemory": "~1.6.3",

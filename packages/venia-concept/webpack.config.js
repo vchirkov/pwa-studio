@@ -5,8 +5,6 @@ const {
 const { DefinePlugin } = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
-const RendererCollectorPlugin = require('@magento/venia-ui/_buildpack');
-
 module.exports = async env => {
     const mediaUrl = await getMediaURL();
 
@@ -81,8 +79,7 @@ module.exports = async env => {
                 collapseWhitespace: true,
                 removeComments: true
             }
-        }),
-        new RendererCollectorPlugin()
+        })
     ];
 
     return [clientConfig, serviceWorkerConfig];
